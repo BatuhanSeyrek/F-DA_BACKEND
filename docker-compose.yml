@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  fida-db:
+    image: postgres:15
+    container_name: fida-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      # Başlangıçta fidadb isminde bir veritabanı oluşturur
+      POSTGRES_DB: fidadb
+    ports:
+      - "5435:5432"
+    volumes:
+      - fida_db_data:/var/lib/postgresql/data
+    networks:
+      - fida-network
+    restart: unless-stopped
+
+volumes:
+  fida_db_data:
+
+networks:
+  fida-network:
+    driver: bridge
