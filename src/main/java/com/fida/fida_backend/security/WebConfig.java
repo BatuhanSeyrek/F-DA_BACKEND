@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
       registry.addInterceptor(userInterceptor)
-                .addPathPatterns("/expenses/record"); // İstediğin pathleri ekle
+                .addPathPatterns("/expenses/record","/expenses/expensesList"); // İstediğin pathleri ekle
 
     }
 

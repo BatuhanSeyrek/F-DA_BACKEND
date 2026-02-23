@@ -1,6 +1,6 @@
 package com.fida.fida_backend.service.user;
 
-import com.fida.fida_backend.entity.user.User;
+import com.fida.fida_backend.entity.User;
 import com.fida.fida_backend.repository.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

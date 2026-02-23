@@ -2,7 +2,7 @@ package com.fida.fida_backend.service.user;
 
 import com.fida.fida_backend.dto.AuthRequest;
 import com.fida.fida_backend.dto.DtoUser;
-import com.fida.fida_backend.entity.user.User;
+import com.fida.fida_backend.entity.User;
 import com.fida.fida_backend.repository.user.UserRepository;
 import com.fida.fida_backend.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

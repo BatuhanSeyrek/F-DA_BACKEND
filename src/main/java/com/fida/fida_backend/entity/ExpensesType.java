@@ -1,4 +1,4 @@
-package com.fida.fida_backend.entity.user;
+package com.fida.fida_backend.entity;
 
 public enum ExpensesType {
     BESLENME_VE_GIDA,

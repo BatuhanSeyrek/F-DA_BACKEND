@@ -1,4 +1,4 @@
-package com.fida.fida_backend.entity.user;
+package com.fida.fida_backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
