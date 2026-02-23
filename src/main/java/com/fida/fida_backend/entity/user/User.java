@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "[user]")
 @Data
@@ -21,4 +23,7 @@ public class User {
     private String userName;
     @Column(name="password",nullable = false)
     private String password;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Expenses> expenses;
+
 }
