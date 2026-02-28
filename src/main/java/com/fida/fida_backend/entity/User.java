@@ -1,9 +1,9 @@
 package com.fida.fida_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import lombok.*;
 
 import java.util.List;
 
@@ -25,5 +25,10 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Expenses> expenses;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude    // Döngüyü kırmak için
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore // Gelirin JSON içinde sonsuz döngüye girmesini önler
+    private Income income;
 
 }

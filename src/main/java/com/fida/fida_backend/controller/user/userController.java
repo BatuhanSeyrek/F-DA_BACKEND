@@ -2,13 +2,12 @@ package com.fida.fida_backend.controller.user;
 
 import com.fida.fida_backend.dto.AuthRequest;
 import com.fida.fida_backend.dto.DtoUser;
+import com.fida.fida_backend.entity.User;
 import com.fida.fida_backend.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -24,5 +23,13 @@ public class userController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody DtoUser request){
         return userService.register(request);
+    }
+    @GetMapping("/list")
+    public DtoUser list(HttpServletRequest httpServletRequest){
+        return userService.list(httpServletRequest);
+    }
+    @PostMapping("/update")
+    public ResponseEntity<User> update(@RequestBody DtoUser request, HttpServletRequest httpServletRequest){
+        return userService.update(request,httpServletRequest);
     }
 }

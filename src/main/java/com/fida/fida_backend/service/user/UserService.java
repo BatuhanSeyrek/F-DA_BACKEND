@@ -5,6 +5,7 @@ import com.fida.fida_backend.dto.DtoUser;
 import com.fida.fida_backend.entity.User;
 import com.fida.fida_backend.repository.user.UserRepository;
 import com.fida.fida_backend.security.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,5 +57,34 @@ public class UserService {
         newUser.setEmail(request.getEmail());
         newUser.setPhoneNumber(request.getPhoneNumber());
         return ResponseEntity.ok().body(String.valueOf(userRepository.save(newUser))) ;
+    }
+    public DtoUser list(HttpServletRequest httpServletRequest){
+        Long id = (Long) httpServletRequest.getAttribute("userId");
+        Optional<User> userOptional = userRepository.findById(id);
+        User user= userOptional.get();
+        DtoUser dtoUser = new DtoUser();
+        dtoUser.setUserName(user.getUserName());
+        dtoUser.setEmail(user.getEmail());
+        dtoUser.setPassword(user.getPassword());
+        dtoUser.setPhoneNumber(user.getPhoneNumber());
+        return dtoUser;
+    }
+    public ResponseEntity<User> update(DtoUser dtoUser, HttpServletRequest httpServletRequest) {
+        Long id = (Long) httpServletRequest.getAttribute("userId");
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (userOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User user = userOptional.get();
+
+        if (dtoUser.getUserName() != null) user.setUserName(dtoUser.getUserName());
+        if (dtoUser.getEmail() != null) user.setEmail(dtoUser.getEmail());
+        if (dtoUser.getPassword() != null) user.setPassword(passwordEncoder.encode(dtoUser.getPassword())); // Şifre encode edilmeli!
+        if (dtoUser.getPhoneNumber() != null) user.setPhoneNumber(dtoUser.getPhoneNumber());
+
+        User updatedUser = userRepository.save(user);
+        return ResponseEntity.ok(updatedUser);
     }
 }
